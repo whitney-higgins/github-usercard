@@ -4,7 +4,6 @@ import axios from "axios";
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-console.log(axios.get("https://api.github.com/users/whitney-higgins"));
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -114,20 +113,17 @@ function cardMaker({
   userInfo.appendChild(userFollowing);
   userInfo.appendChild(userBio);
 
-  // add interactivity
-
   console.log(card);
   return card;
 }
 
-const testCard = cardMaker({
-  avatarUrl: "testing",
-  name: "testing",
-  login: "testing",
-  location: "testing",
-  url: "testing",
-  followers: "testing",
-  following: "testing",
-  bio: "testing",
-});
-deck.appendChild(testCard);
+axios
+  .get("https://api.github.com/users/whitney-higgins")
+  .then((response) => {
+    let card = cardMaker(response.data);
+    deck.appendChild(card);
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+
