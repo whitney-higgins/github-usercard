@@ -1,8 +1,10 @@
+import axios from "axios";
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+console.log(axios.get("https://api.github.com/users/whitney-higgins"));
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -58,3 +60,74 @@ const followersArray = [];
     luishrd
     bigknell
 */
+
+const deck = document.querySelector(".cards");
+
+function cardMaker({
+  avatarUrl,
+  name,
+  login,
+  location,
+  url,
+  followers,
+  following,
+  bio,
+}) {
+  // create the elements
+  const card = document.createElement("div");
+  const avatar = document.createElement("img");
+  const userInfo = document.createElement("div");
+  const header = document.createElement("h3");
+  const username = document.createElement("p");
+  const userLocation = document.createElement("p");
+  const profile = document.createElement("p");
+  const userUrl = document.createElement("a");
+  const userFollowers = document.createElement("p");
+  const userFollowing = document.createElement("p");
+  const userBio = document.createElement("p");
+
+  // assign context to elements
+  avatar.src = avatarUrl;
+  header.textContent = name;
+  username.textContent = login;
+  userLocation.textContent = location;
+  userUrl.textContent = url;
+  userFollowers.textContent = followers;
+  userFollowing.textContent = following;
+  userBio.textContent = bio;
+
+  // add class names
+  card.classList.add("card");
+  userInfo.classList.add("card-info");
+  header.classList.add("name");
+  username.classList.add("username");
+
+  // create hierarchy
+  card.appendChild(avatar);
+  card.appendChild(userInfo);
+  userInfo.appendChild(header);
+  userInfo.appendChild(username);
+  userInfo.appendChild(userLocation);
+  userInfo.appendChild(profile);
+  profile.appendChild(userUrl);
+  userInfo.appendChild(userFollowers);
+  userInfo.appendChild(userFollowing);
+  userInfo.appendChild(userBio);
+
+  // add interactivity
+
+  console.log(card);
+  return card;
+}
+
+const testCard = cardMaker({
+  avatarUrl: "testing",
+  name: "testing",
+  login: "testing",
+  location: "testing",
+  url: "testing",
+  followers: "testing",
+  following: "testing",
+  bio: "testing",
+});
+deck.appendChild(testCard);
