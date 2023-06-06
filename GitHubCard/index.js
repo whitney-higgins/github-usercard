@@ -29,7 +29,13 @@ import axios from "axios";
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  "tetondan",
+  "dustinmyers",
+  "justsml",
+  "luishrd",
+  "bigknell",
+];
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -90,6 +96,7 @@ function cardMaker({
   header.textContent = name;
   username.textContent = login;
   userLocation.textContent = location;
+  profile.textContent = "Profile:";
   userUrl.textContent = url;
   userFollowers.textContent = followers;
   userFollowing.textContent = following;
@@ -117,13 +124,23 @@ function cardMaker({
   return card;
 }
 
-axios
-  .get("https://api.github.com/users/whitney-higgins")
-  .then((response) => {
-    let card = cardMaker(response.data);
-    deck.appendChild(card);
-  })
-  .catch((error) => {
-    console.log("Error:", error);
-  });
+followersArray.forEach((user) => {
+  axios
+    .get(`https://api.github.com/users/${user}`)
+    .then((response) => {
+      deck.appendChild(cardMaker(response.data));
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+});
 
+// axios
+//   .get("https://api.github.com/users/whitney-higgins")
+//   .then((response) => {
+//     let card = cardMaker(response.data);
+//     deck.appendChild(card);
+//   })
+//   .catch((error) => {
+//     console.log("Error:", error);
+//   });
